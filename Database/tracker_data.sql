@@ -12,9 +12,9 @@ INSERT INTO shows VALUES (NULL, "The Simpsons", 733);
 INSERT INTO shows VALUES (NULL, "Vikings", 89);
 INSERT INTO shows VALUES (NULL, "House of the Dragon", 10);
 INSERT INTO shows VALUES (NULL, "Rick and Morty", 51);
-INSERT INTO shows VALUES (NULL, "House of the Dragon", 10);
-INSERT INTO shows VALUES (NULL, "House of the Dragon", 10);
-INSERT INTO shows VALUES (NULL, "House of the Dragon", 10);
+INSERT INTO shows VALUES (NULL, "Stranger Things", 34);
+INSERT INTO shows VALUES (NULL, "Breaking Bad", 62);
+INSERT INTO shows VALUES (NULL, "Dexter", 96);
 INSERT INTO shows VALUES (NULL, "House of the Dragon", 10);
 
 SELECT * from user;
