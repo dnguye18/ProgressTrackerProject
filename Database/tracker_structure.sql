@@ -35,5 +35,6 @@ CREATE TABLE IF NOT EXISTS watchlist (
 CREATE TABLE IF NOT EXISTS watchlist_progress (
 	watchlist_id INT NOT NULL,
     progress_id INT NOT NULL,
+    FOREIGN KEY (watchlist_id) REFERENCES watchlist(watchlist_id),
     FOREIGN KEY (progress_id) REFERENCES progress(progress_name)
 );
