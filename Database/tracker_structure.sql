@@ -24,12 +24,16 @@ CREATE TABLE IF NOT EXISTS progress (
 );
 
 CREATE TABLE IF NOT EXISTS watchlist (
+	watchlist_id INT NOT NULL AUTO_INCREMENT,
 	user_id INT NOT NULL,
     show_id INT NOT NULL,
-    progress_id INT NOT NULL,
-    eps_seen INT NOT NULL,
-    PRIMARY KEY (user_id, show_id),
+    PRIMARY KEY (watchlist_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (show_id) REFERENCES shows(show_id),
-    FOREIGN KEY (progress_id) REFERENCES progress(progress_id)
+    FOREIGN KEY (show_id) REFERENCES shows(show_id)
+);
+
+CREATE TABLE IF NOT EXISTS watchlist_progress (
+	watchlist_id INT NOT NULL,
+    progress_id INT NOT NULL,
+    FOREIGN KEY (progress_id) REFERENCES progress(progress_name)
 );
