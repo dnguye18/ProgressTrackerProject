@@ -9,13 +9,13 @@ public class UserDAOClass implements UserDAO {
 	}
 
 	@Override
-	public boolean getUser(int u_id) {
+	public User getUser(int u_id) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
-	public boolean deleteUser(int u_id) {
+	public boolean deleteUser(int u_id) {	
 		// TODO Auto-generated method stub
 		return false;
 	}
