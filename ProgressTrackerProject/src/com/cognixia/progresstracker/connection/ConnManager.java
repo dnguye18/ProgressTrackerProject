@@ -7,6 +7,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Database connection
+ */
 public class ConnManager {
     private static Connection connection = null;
 

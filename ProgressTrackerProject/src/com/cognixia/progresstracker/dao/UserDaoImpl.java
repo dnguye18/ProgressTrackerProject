@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
             return user;
 
         } catch (SQLException e) {
-            System.out.println("Department with id = " + userId + " not found.");
+            System.out.println("User with id = " + userId + " not found.");
         }
 
         return null;

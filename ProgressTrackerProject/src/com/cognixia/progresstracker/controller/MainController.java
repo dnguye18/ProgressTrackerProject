@@ -4,6 +4,10 @@ import com.cognixia.progresstracker.entities.Watchlist;
 import com.cognixia.progresstracker.dao.WatchlistDaoImpl;
 import com.cognixia.progresstracker.view.View;
 
+/**
+ * Controls main program
+ * Lets users view, update and add to their watchlist
+ */
 public class MainController {
     private View view = new View();
     private WatchlistDaoImpl dao = new WatchlistDaoImpl();
