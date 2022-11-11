@@ -11,15 +11,17 @@ public class View {
 
     public int menu() {
         print("Main Menu");
-        print("1. Login");
-        print("2. Register an Account");
+        print("1. View Watchlist");
+        print("2. Update Watchlist");
         print("0. Exit");
 
         return readInt("Please select from the above choices.", 0, 2);
     }
 
+    public int getWatchlistId() {
+        return readInt("Please enter watchlist id");
 
-
+    }
     public static void print(String msg) {
         System.out.println(msg);
     }

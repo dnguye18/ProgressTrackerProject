@@ -5,7 +5,7 @@ import com.cognixia.progresstracker.entities.Watchlist;
 import java.util.List;
 
 public interface WatchlistDao {
-    Watchlist getWatchlistrById(int watchlistId);
+    Watchlist getWatchlistById(int watchlistId);
     List<Watchlist> getAllWatchlists();
     List<Watchlist> searchWatchlist(int watchlistId);
     Watchlist addWatchlist(Watchlist watchlist);

@@ -1,9 +1,12 @@
 package com.cognixia.progresstracker.controller;
 
+import com.cognixia.progresstracker.entities.Watchlist;
+import com.cognixia.progresstracker.dao.WatchlistDaoImpl;
 import com.cognixia.progresstracker.view.View;
 
 public class MainController {
     private View view = new View();
+    private WatchlistDaoImpl dao = new WatchlistDaoImpl();
 
     boolean running = true;
 
@@ -17,10 +20,10 @@ public class MainController {
             switch (choice) {
 
                 case 1:
-                    login();
+                    viewWatchlist();
                     break;
                 case 2:
-                    signup();
+                    updateWatchlist();
                     break;
                 case 0:
                     exit();
@@ -34,11 +37,17 @@ public class MainController {
         }
     }
 
-    private void login() {
+    private void viewWatchlist() {
+        int watchlistid = view.getWatchlistId();
 
+        Watchlist watchlist = dao.getWatchlistById(watchlistid);
+
+        if(watchlist != null) System.out.println(watchlist.getWatchlistid() + " is in the db.");
+
+        else System.out.println(watchlistid + " Was not found.");
     }
 
-    private void signup() {
+    private void updateWatchlist() {
 
     }
 
