@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.cognixia.progresstracker.entities.Progress;
+import com.cognixia.progresstracker.entities.Show;
 import com.cognixia.progresstracker.entities.Watchlist;
 
 public class View {
@@ -49,6 +50,19 @@ public class View {
     	index = readInt("Select a watchlist", 1, index);
     	
     	return listWatch.get(index - 1);
+    }
+    
+    public Show selectShow(List<Show> listShow) {
+    	int index = 0;
+    	
+    	for (Show show: listShow) {
+    		index++;
+    		print(index + ". " + show.toString());
+    	}
+    	
+    	index = readInt("Select a show", 1, index);
+    	
+    	return listShow.get(index - 1);
     }
     
     public String getEmail() {

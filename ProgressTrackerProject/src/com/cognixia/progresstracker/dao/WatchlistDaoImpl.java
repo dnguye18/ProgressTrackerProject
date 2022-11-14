@@ -100,7 +100,7 @@ public class WatchlistDaoImpl implements WatchlistDao {
             PreparedStatement pstmt = conn.prepareStatement("INSERT into watchlist(user_id, show_id, progress_id) values(?, ?, ?)");
             pstmt.setInt(1, watchlist.getUserid());
             pstmt.setInt(2, watchlist.getShowid());
-            pstmt.setInt(2, watchlist.getProgressAsInt());
+            pstmt.setInt(3, watchlist.getProgressAsInt());
 
             int i = pstmt.executeUpdate();
 

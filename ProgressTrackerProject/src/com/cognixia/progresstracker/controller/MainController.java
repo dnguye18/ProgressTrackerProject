@@ -1,11 +1,13 @@
 package com.cognixia.progresstracker.controller;
 
 import com.cognixia.progresstracker.entities.Progress;
+import com.cognixia.progresstracker.entities.Show;
 import com.cognixia.progresstracker.entities.User;
 import com.cognixia.progresstracker.entities.Watchlist;
 
 import java.util.List;
 
+import com.cognixia.progresstracker.dao.ShowDaoImpl;
 import com.cognixia.progresstracker.dao.WatchlistDaoImpl;
 import com.cognixia.progresstracker.view.View;
 
@@ -16,7 +18,8 @@ import com.cognixia.progresstracker.view.View;
 public class MainController {
     private View view = new View();
     private UserController userCon = new UserController();
-    private WatchlistDaoImpl dao = new WatchlistDaoImpl();
+    private WatchlistDaoImpl watchDao = new WatchlistDaoImpl();
+    private ShowDaoImpl showDao = new ShowDaoImpl();
 
     private boolean running = true;
     private boolean internalLoopRun = true; 
@@ -38,6 +41,7 @@ public class MainController {
 						break;
 					case 2:
 						addWatchlist(currUser);
+						break;
 					case 3:
 						updateWatchlist(currUser);
 						break;
@@ -61,22 +65,30 @@ public class MainController {
 
 		}
 	}
+	
+	private void viewWatchlist(User currUser) {
+		List<Watchlist> wl = watchDao.getWatchlistByUserId(currUser.getId());
+		for (Watchlist entry: wl) {
+			View.print(entry.toString());
+		}
+	}
     
     private void addWatchlist(User currUser) {
-    	Show selected = view.selectShow();
+    	Show selected = view.selectShow(showDao.getAllShows());
+    	watchDao.addWatchlist(new Watchlist(0, currUser.getId(), selected.getShowid(), Progress.NOT_STARTED.idValue()));
 
     }
 
     private void updateWatchlist(User currUser) {
-    	Watchlist selected = view.selectWatchlist(dao.getWatchlistByUserId(currUser.getId()));
+    	Watchlist selected = view.selectWatchlist(watchDao.getWatchlistByUserId(currUser.getId()));
     	Progress progressChange = view.getProgressChoice();
-    	dao.updateWatchlist(new Watchlist(selected.getWatchlistid(), currUser.getId(),
+    	watchDao.updateWatchlist(new Watchlist(selected.getWatchlistid(), currUser.getId(),
     			selected.getShowid(), progressChange.idValue()));
     }
     
     private void deleteWatchList(User currUser) {
-    	Watchlist selected = view.selectWatchlist(dao.getWatchlistByUserId(currUser.getId()));
-    	dao.deleteWatchlistById(selected.getWatchlistid());
+    	Watchlist selected = view.selectWatchlist(watchDao.getWatchlistByUserId(currUser.getId()));
+    	watchDao.deleteWatchlistById(selected.getWatchlistid());
     }
 
     private void exit() {

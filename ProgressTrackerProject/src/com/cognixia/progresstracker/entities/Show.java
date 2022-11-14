@@ -6,13 +6,15 @@ public class Show {
 
     private int showid;
     private String showName;
+    private int totalEpisodes;
 
-    public Show(int showid, String showName) {
+    public Show(int showid, String showName, int totalEpisodes) {
         this.showid = showid;
         this.showName = showName;
+        this.totalEpisodes = totalEpisodes;
     }
 
-    @Override
+	@Override
     public String toString() {
         return "Show{" +
                 "showid=" + showid +
@@ -47,5 +49,9 @@ public class Show {
 
     public void setShowName(String showName) {
         this.showName = showName;
+    }
+    
+    public int getTotalEpisodes() {
+    	return totalEpisodes;
     }
 }
