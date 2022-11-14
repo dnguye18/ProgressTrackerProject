@@ -1,10 +1,5 @@
 USE progresstracker;
 
-SELECT * FROM progress;
-INSERT INTO progress VALUES (0, "not completed");
-INSERT INTO progress VALUES (1, "in-progress");
-INSERT INTO progress VALUES (2, "completed");
-
 SELECT * FROM shows;
 INSERT INTO shows VALUES (NULL, "SpongeBob SquarePants", 277);
 INSERT INTO shows VALUES (NULL, "Family Guy", 394);
@@ -21,4 +16,4 @@ SELECT * FROM watchlist WHERE watchlist_id = 1;
 SELECT * FROM user;
 
 INSERT INTO user VALUES (NULL, "test@test.com", "test", "billy", "bob");
-INSERT INTO watchlist VALUES (NULL, 1, 1);
+INSERT INTO watchlist VALUES (NULL, 1, 1, 1);

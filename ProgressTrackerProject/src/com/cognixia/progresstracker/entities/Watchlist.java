@@ -7,11 +7,13 @@ public class Watchlist {
     private int watchlistid;
     private int userid;
     private int showid;
+    private int progressid;
 
-    public Watchlist(int watchlistid, int userid, int showid) {
+    public Watchlist(int watchlistid, int userid, int showid, int progressid) {
         this.watchlistid = watchlistid;
         this.userid = userid;
         this.showid = showid;
+        this.progressid = progressid;
     }
 
     @Override
@@ -49,6 +51,14 @@ public class Watchlist {
 
     public void setShowid(int showid) {
         this.showid = showid;
+    }
+
+    public int getProgressid() {
+        return progressid;
+    }
+
+    public void setProgressid(int progressid) {
+        this.progressid = progressid;
     }
 
     @Override
