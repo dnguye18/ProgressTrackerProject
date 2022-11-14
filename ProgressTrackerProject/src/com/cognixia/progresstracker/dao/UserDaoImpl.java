@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 
             ResultSet rs = pstmt.executeQuery();
 
-            rs.first();
+            rs.next();
 
 
             int id = rs.getInt("user_id");
@@ -50,6 +50,29 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user");
+
+            List<User> userList = new ArrayList<User>();
+
+            while(rs.next()) {
+                int userid = rs.getInt("user_id");
+                String email = rs.getInString("email");
+                int password = rs.getInt("password");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+
+                User list = new User(userid, email, password,firstName,lastName);
+                userList.add(list);
+            }
+
+            // ...and return that list once finished
+            return userList;
+
+        } catch (SQLException e) {
+            System.out.println("Could not retrieve user list from database");
+        }
         return null;
     }
 
