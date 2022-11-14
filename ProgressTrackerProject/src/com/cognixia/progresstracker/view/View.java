@@ -21,7 +21,7 @@ public class View {
         print("4. Delete Watchlist");
         print("0. Exit");
 
-        return readInt("Please select from the above choices.", 0, 3);
+        return readInt("Please select from the above choices.", 0, 4);
     }
     
     public int loginMenu() {

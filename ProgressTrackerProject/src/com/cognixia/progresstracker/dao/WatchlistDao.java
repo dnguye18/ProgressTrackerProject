@@ -9,7 +9,7 @@ public interface WatchlistDao {
     Watchlist getWatchlistByProgress(int progressId);
     List<Watchlist> getAllWatchlists();
     List<Watchlist> getWatchlistByUserId(int userId);
-    Watchlist addWatchlist(Watchlist watchlist);
-    void updateWatchlist(Watchlist watchlist);
-    void deleteWatchlistById(int watchlistId);
+    Boolean addWatchlist(Watchlist watchlist);
+    Boolean updateWatchlist(Watchlist watchlist);
+    Boolean deleteWatchlistById(int watchlistId);
 }

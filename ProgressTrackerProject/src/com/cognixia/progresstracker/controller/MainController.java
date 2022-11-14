@@ -61,17 +61,10 @@ public class MainController {
 
 		}
 	}
-
-    private void viewWatchlist(User currUser) {
-        List<Watchlist> watchlist = dao.getWatchlistByUserId(currUser.getId());
-        
-        for (Watchlist entry: watchlist) {
-        	View.print(entry.toString());
-        }
-    }
     
     private void addWatchlist(User currUser) {
-    	Show selected = view.selectShow()
+    	Show selected = view.selectShow();
+
     }
 
     private void updateWatchlist(User currUser) {
