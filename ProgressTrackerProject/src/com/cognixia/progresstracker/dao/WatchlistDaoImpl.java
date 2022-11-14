@@ -168,7 +168,7 @@ public class WatchlistDaoImpl implements WatchlistDao {
     }
 
     @Override
-    public void updateWatchlist(Watchlist watchlist) {
+    public Boolean updateWatchlist(Watchlist watchlist) {
         try {
             PreparedStatement pstmt = conn.prepareStatement("UPDATE watchlist SET user_id = ?, show_id = ?, progress_id = ? WHERE watchlist_id = ?");
             pstmt.setInt(1, watchlist.getUserid());
@@ -177,21 +177,33 @@ public class WatchlistDaoImpl implements WatchlistDao {
 
             int i = pstmt.executeUpdate();
 
+            if(i > 0) {
+                return true;
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return false;
     }
 
     @Override
-    public void deleteWatchlistById(int watchlistId) {
+    public Boolean deleteWatchlistById(int watchlistId) {
         try {
             PreparedStatement pstmt = conn.prepareStatement("DELETE from watchlist WHERE watchlist_id = ?");
             pstmt.setInt(1, watchlistId);
 
             int i = pstmt.executeUpdate();
 
+            if(i > 0) {
+                return true;
+            }
+
         } catch (SQLException e) {
             System.out.println("Department with id = " + watchlistId + " not found.");
         }
+
+        return false;
     }
 }

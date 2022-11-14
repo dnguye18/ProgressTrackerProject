@@ -11,6 +11,6 @@ public interface WatchlistDao {
     List<Watchlist> getAllWatchlists();
     List<Watchlist> searchWatchlist(int userId);
     Boolean addWatchlist(Watchlist watchlist);
-    void updateWatchlist(Watchlist watchlist);
-    void deleteWatchlistById(int watchlistId);
+    Boolean updateWatchlist(Watchlist watchlist);
+    Boolean deleteWatchlistById(int watchlistId);
 }
