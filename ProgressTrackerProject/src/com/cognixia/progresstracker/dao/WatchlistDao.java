@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface WatchlistDao {
     Watchlist getWatchlistById(int watchlistId);
-    List<Watchlist> getAllWatchlists();
+    public void getAllWatchlists();
     List<Watchlist> searchWatchlist(int watchlistId);
     Watchlist addWatchlist(Watchlist watchlist);
     void updateWatchlist(Watchlist watchlist);
