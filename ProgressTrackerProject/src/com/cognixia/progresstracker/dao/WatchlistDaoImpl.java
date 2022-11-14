@@ -37,11 +37,11 @@ public class WatchlistDaoImpl implements WatchlistDao {
 
         return null;
     }
-
+	
     @Override
-    public List<Watchlist> getAllWatchlists() {
+    public static void getAllWatchlists() {
         try {
-			PreparedStatement pstmt = conn.preparedStatment("SELECT * FROM watchlist");
+	    PreparedStatement pstmt = conn.preparedStatment("SELECT * FROM watchlist");
             ResultSet rs = pstmt.executeQuery();
             System.out.println("--------------All Watch Lists--------------");
             while(rs.next()) {
@@ -53,12 +53,16 @@ public class WatchlistDaoImpl implements WatchlistDao {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-        return null;
     }
 
     @Override
-    public List<Watchlist> searchWatchlist(int watchlistId) {
-        return null;
+    public static void searchWatchlist(int watchlistId) {
+        try{
+	    	PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM watchlist WHERE email =?;");	
+		pstmt.
+	}catch(Exception e){
+	e.printStackTrace();
+	}	
     }
 
     @Override
