@@ -6,6 +6,7 @@
                 
         <wb-resource deploy-path="/" source-path="/src/main/com.cognixia.webapp" tag="defaultRootSource"/>
                 
+<<<<<<< HEAD
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
@@ -14,6 +15,9 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
 >>>>>>> lewi
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+=======
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
+>>>>>>> main
                 
         <property name="context-root" value="ProgressTrackerProject"/>
                 
