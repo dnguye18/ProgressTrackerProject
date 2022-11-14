@@ -1,5 +1,6 @@
 package com.cognixia.progresstracker.controller;
 
+import com.cognixia.progresstracker.entities.Progress;
 import com.cognixia.progresstracker.entities.User;
 import com.cognixia.progresstracker.entities.Watchlist;
 
@@ -36,7 +37,12 @@ public class MainController {
 						viewWatchlist(currUser);
 						break;
 					case 2:
-						updateWatchlist();
+						addWatchlist(currUser);
+					case 3:
+						updateWatchlist(currUser);
+						break;
+					case 4:
+						deleteWatchList(currUser);
 						break;
 					case 0:
 						exitInternal();
@@ -57,15 +63,27 @@ public class MainController {
 	}
 
     private void viewWatchlist(User currUser) {
-        List<Watchlist> watchlist = dao.getWatchlistByUser(currUser.getId());
+        List<Watchlist> watchlist = dao.getWatchlistByUserId(currUser.getId());
         
         for (Watchlist entry: watchlist) {
         	View.print(entry.toString());
         }
     }
+    
+    private void addWatchlist(User currUser) {
+    	Show selected = view.selectShow()
+    }
 
-    private void updateWatchlist() {
-
+    private void updateWatchlist(User currUser) {
+    	Watchlist selected = view.selectWatchlist(dao.getWatchlistByUserId(currUser.getId()));
+    	Progress progressChange = view.getProgressChoice();
+    	dao.updateWatchlist(new Watchlist(selected.getWatchlistid(), currUser.getId(),
+    			selected.getShowid(), progressChange.idValue()));
+    }
+    
+    private void deleteWatchList(User currUser) {
+    	Watchlist selected = view.selectWatchlist(dao.getWatchlistByUserId(currUser.getId()));
+    	dao.deleteWatchlistById(selected.getWatchlistid());
     }
 
     private void exit() {

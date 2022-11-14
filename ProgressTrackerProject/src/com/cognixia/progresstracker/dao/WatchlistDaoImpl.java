@@ -66,14 +66,12 @@ public class WatchlistDaoImpl implements WatchlistDao {
     }
 
     @Override
-    public List<Watchlist> searchWatchlist(int userId) {
+    public List<Watchlist> getWatchlistByUserId(int userId) {
         try {
             PreparedStatement pstmt = conn.prepareStatement("select * from watchlist where user_id = ?");
             pstmt.setInt(1, userId);
 
             ResultSet rs = pstmt.executeQuery();
-
-            rs.next();
 
             List<Watchlist> watchList = new ArrayList<Watchlist>();
 
@@ -104,7 +102,7 @@ public class WatchlistDaoImpl implements WatchlistDao {
             pstmt.setInt(1, watchlist.getWatchlistid());
             pstmt.setInt(2, watchlist.getUserid());
             pstmt.setInt(2, watchlist.getShowid());
-            pstmt.setInt(2, watchlist.getProgressid());
+            pstmt.setInt(2, watchlist.getProgressAsInt());
 
             int i = pstmt.executeUpdate();
 
@@ -147,40 +145,15 @@ public class WatchlistDaoImpl implements WatchlistDao {
     }
 
     @Override
-    public Watchlist getWatchlistByUser(int userId) {
-        try {
-            PreparedStatement pstmt = conn.prepareStatement("select * from watchlist where watchlist_id = ?");
-            pstmt.setInt(1, userId);
-
-            ResultSet rs = pstmt.executeQuery();
-
-            rs.next();
-
-
-            int watchlistid = rs.getInt("watchlist_id");
-            int userid = rs.getInt("user_id");
-            int showid = rs.getInt("show_id");
-            int progressid = rs.getInt("progress_id");
-
-            Watchlist watchlist = new Watchlist(watchlistid, userid, showid, progressid);
-            return watchlist;
-
-        } catch (SQLException e) {
-            System.out.println("Watchlist with id = " + userId + " not found.");
-        }
-
-        return null;
-    }
-
-    @Override
     public void updateWatchlist(Watchlist watchlist) {
         try {
             PreparedStatement pstmt = conn.prepareStatement("UPDATE watchlist SET user_id = ?, show_id = ?, progress_id = ? WHERE watchlist_id = ?");
             pstmt.setInt(1, watchlist.getUserid());
             pstmt.setInt(2, watchlist.getShowid());
-            pstmt.setInt(3, watchlist.getProgressid());
+            pstmt.setInt(3, watchlist.getProgressAsInt());
+            pstmt.setInt(4, watchlist.getWatchlistid());
 
-            int i = pstmt.executeUpdate();
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -193,7 +166,7 @@ public class WatchlistDaoImpl implements WatchlistDao {
             PreparedStatement pstmt = conn.prepareStatement("DELETE from watchlist WHERE watchlist_id = ?");
             pstmt.setInt(1, watchlistId);
 
-            int i = pstmt.executeUpdate();
+            pstmt.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("Department with id = " + watchlistId + " not found.");

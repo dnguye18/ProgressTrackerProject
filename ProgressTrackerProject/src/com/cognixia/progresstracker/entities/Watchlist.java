@@ -7,13 +7,22 @@ public class Watchlist {
     private int watchlistid;
     private int userid;
     private int showid;
-    private int progressid;
+    private Progress progressid;
 
     public Watchlist(int watchlistid, int userid, int showid, int progressid) {
         this.watchlistid = watchlistid;
         this.userid = userid;
         this.showid = showid;
-        this.progressid = progressid;
+        switch(progressid) {
+        case 1:
+        	this.progressid = Progress.NOT_STARTED;
+        	break;
+        case 2:
+        	this.progressid = Progress.IN_PROGRESS;
+        	break;
+        case 3:
+        	this.progressid = Progress.COMPLETED;
+        }
     }
 
     @Override
@@ -53,11 +62,15 @@ public class Watchlist {
         this.showid = showid;
     }
 
-    public int getProgressid() {
+    public Progress getProgressid() {
         return progressid;
     }
+    
+    public int getProgressAsInt() {
+    	return this.progressid.idValue();
+    }
 
-    public void setProgressid(int progressid) {
+    public void setProgressid(Progress progressid) {
         this.progressid = progressid;
     }
 
@@ -67,6 +80,7 @@ public class Watchlist {
                 "watchlistid=" + watchlistid +
                 ", userid=" + userid +
                 ", showid=" + showid +
+                ", progressid=" + progressid.idValue() + 
                 '}';
     }
 }
