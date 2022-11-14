@@ -65,7 +65,18 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void updateUser(User user) {
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE user SET email = ?, password = ?, first_name = ?, last_name = ? WHERE user_id = ?");
+            pstmt.setInt(1, user.getEmail());
+            pstmt.setInt(2, user.getPassword());
+            pstmt.setInt(3, user.getFirstName());
+            pstmt.setInt(4, user.getLastName());
 
+            int i = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
