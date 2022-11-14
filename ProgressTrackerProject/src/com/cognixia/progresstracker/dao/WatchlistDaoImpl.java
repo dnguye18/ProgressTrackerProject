@@ -40,6 +40,19 @@ public class WatchlistDaoImpl implements WatchlistDao {
 
     @Override
     public List<Watchlist> getAllWatchlists() {
+        try {
+			PreparedStatement pstmt = conn.preparedStatment("SELECT * FROM watchlist");
+            ResultSet rs = pstmt.executeQuery();
+            System.out.println("--------------All Watch Lists--------------");
+            while(rs.next()) {
+				System.out.println("user id: "+rs.getString("user_id")+ " Show Id: "+rs.getString("show_id")+" Progress Id: "+rs.getString("progress_id")+" Episodes Seen: "+rs.getString("eps_seen"));
+			}
+            System.out.println("-------------------------------------------");
+            rs.close();			
+			pstmt.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
         return null;
     }
 
