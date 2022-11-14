@@ -5,19 +5,11 @@ import com.cognixia.progresstracker.entities.Show;
 import java.util.List;
 
 public class ShowDaoImpl implements ShowDao {
-   
 
-    @Override
-    public Show getShowByName(String name) {
-        return null;
-    }
-
-   
-
-    @Override
-    public List<Show> searchShow(int showId) {
-        return null;
-    }
+//    @Override
+//    public List<Show> searchShow(int showId) {
+//        return null;
+//    }
 
 
 	private Connection conn = ConnectionManager.getConnection();
@@ -40,7 +32,6 @@ public class ShowDaoImpl implements ShowDao {
 			// TODO handle invalid total episodes
 			sc.close();
 		}
-		
 		
 
 		try {
@@ -192,6 +183,32 @@ public boolean addShow() {
 		}
 		return null;
 	}
+	@Override
+	public Show getShowByName(String show_name) {
+		int show_id = 0;
+		String show_name = null;
+		int total_eps = 0;
+		
+		try {
+			Scanner sc = new Scanner(System.in);
+			PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM shows WHERE (show_name = ?) ");
+			pstmt.setString(1, show_name);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				show_id = rs.getInt("show_id");
+				show_name = rs.getString("show_name");
+				total_eps = rs.getInt("total_eps");
+				
+				return new Show(show_id, show_name, total_eps);
+			} 
+
+		} catch (Exception e) {
+			System.out.println("Unable to get " + show_name + " from database.");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 
 	@Override
 	public List<Show> getAllShows() {
