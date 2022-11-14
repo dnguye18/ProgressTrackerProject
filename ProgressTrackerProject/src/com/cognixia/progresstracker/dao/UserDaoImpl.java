@@ -55,6 +55,34 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> searchUser(int userId) {
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("select * from user where user_id = ?");
+            pstmt.setInt(1, userId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            rs.next();
+
+            List<User> user = new ArrayList<User>();
+
+            while(rs.next()) {
+                int userid = rs.getInt("user_id");
+                String email = rs.getInString("email");
+                int password = rs.getInt("password");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+
+                User list = new User(userid, email, password,firstName,lastName);
+                user.add(list);
+            }
+
+            // ...and return that list once finished
+            return user;
+
+        } catch (SQLException e) {
+            System.out.println("Could not retrieve user's watchlist from database");
+        }
+
         return null;
     }
 
