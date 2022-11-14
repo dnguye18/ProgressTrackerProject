@@ -133,7 +133,25 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User addUser(User user) {
-        return null;
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("INSERT into user(email,password,first_name,last_name ) values(?, ?, ?, ?)");
+            pstmt.setInt(1, user.getEmail());
+            pstmt.setInt(2, user.getPassword());
+            pstmt.setInt(3, user.getFirstName());
+            pstmt.setInt(4, user.getLastName());
+
+            int i = pstmt.executeUpdate();
+
+            if(i > 0) {
+                return user;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
     }
 
     @Override
