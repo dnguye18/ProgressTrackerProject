@@ -29,6 +29,8 @@ public class MainController {
                 case 2:
                     updateWatchlist();
                     break;
+                case 3:
+                    tests();
                 case 0:
                     exit();
                     break;
@@ -41,6 +43,15 @@ public class MainController {
         }
     }
 
+    private void tests() {
+        Watchlist list = view.addWatchlist();
+        if (dao.addWatchlist(list)) {
+            System.out.println("Successfully added");
+        } else {
+            System.out.println("Error adding watchlist");
+        }
+
+    }
     private void viewWatchlist() {
         int watchlistid = view.getWatchlistId();
 

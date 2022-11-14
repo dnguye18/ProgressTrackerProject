@@ -55,7 +55,6 @@ public class WatchlistDaoImpl implements WatchlistDao {
                 watchList.add(list);
             }
 
-            // ...and return that list once finished
             return watchList;
 
         } catch (SQLException e) {
@@ -72,8 +71,6 @@ public class WatchlistDaoImpl implements WatchlistDao {
             pstmt.setInt(1, userId);
 
             ResultSet rs = pstmt.executeQuery();
-
-            rs.next();
 
             List<Watchlist> watchList = new ArrayList<Watchlist>();
 
@@ -98,26 +95,24 @@ public class WatchlistDaoImpl implements WatchlistDao {
     }
 
     @Override
-    public Watchlist addWatchlist(Watchlist watchlist) {
+    public Boolean addWatchlist(Watchlist watchlist) {
         try {
-            PreparedStatement pstmt = conn.prepareStatement("INSERT into watchlist(NULL, user_id, show_id, progress_id) values(?, ?, ?, ?)");
-            pstmt.setInt(1, watchlist.getWatchlistid());
-            pstmt.setInt(2, watchlist.getUserid());
+            PreparedStatement pstmt = conn.prepareStatement("INSERT into watchlist(user_id, show_id, progress_id) values(?, ?, ?)");
+            pstmt.setInt(1, watchlist.getUserid());
             pstmt.setInt(2, watchlist.getShowid());
-            pstmt.setInt(2, watchlist.getProgressid());
+            pstmt.setInt(3, watchlist.getProgressid());
 
             int i = pstmt.executeUpdate();
 
             if(i > 0) {
-                return watchlist;
+                return true;
             }
-
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return watchlist;
+        return false;
     }
 
     @Override

@@ -9,6 +9,10 @@ public class Watchlist {
     private int showid;
     private int progressid;
 
+    public Watchlist() {
+
+    }
+
     public Watchlist(int watchlistid, int userid, int showid, int progressid) {
         this.watchlistid = watchlistid;
         this.userid = userid;

@@ -1,5 +1,7 @@
 package com.cognixia.progresstracker.view;
 
+import com.cognixia.progresstracker.entities.Watchlist;
+
 import java.util.Scanner;
 
 public class View {
@@ -13,9 +15,22 @@ public class View {
         print("Main Menu");
         print("1. View Watchlist");
         print("2. Update Watchlist");
+        print("3. Tests");
         print("0. Exit");
 
-        return readInt("Please select from the above choices.", 0, 2);
+        return readInt("Please select from the above choices.", 0, 3);
+    }
+
+    public Watchlist addWatchlist() {
+        int userid = readInt("Enter user id");
+        int showid = readInt("Enter show id");
+        int progressid = readInt("Enter progress id");
+
+        Watchlist list = new Watchlist();
+        list.setUserid(userid);
+        list.setShowid(showid);
+        list.setProgressid(progressid);
+        return list;
     }
 
     public int getWatchlistId() {

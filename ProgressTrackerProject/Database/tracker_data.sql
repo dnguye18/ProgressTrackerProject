@@ -12,7 +12,7 @@ INSERT INTO shows VALUES (NULL, "Breaking Bad", 62);
 INSERT INTO shows VALUES (NULL, "Dexter", 96);
 INSERT INTO shows VALUES (NULL, "House of the Dragon", 10);
 
-SELECT * FROM watchlist WHERE watchlist_id = 1;
+SELECT * FROM watchlist;
 SELECT * FROM user;
 
 INSERT INTO user VALUES (NULL, "test@test.com", "test", "billy", "bob");

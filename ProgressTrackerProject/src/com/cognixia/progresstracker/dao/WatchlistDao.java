@@ -10,7 +10,7 @@ public interface WatchlistDao {
     Watchlist getWatchlistByUser(int userId);
     List<Watchlist> getAllWatchlists();
     List<Watchlist> searchWatchlist(int userId);
-    Watchlist addWatchlist(Watchlist watchlist);
+    Boolean addWatchlist(Watchlist watchlist);
     void updateWatchlist(Watchlist watchlist);
     void deleteWatchlistById(int watchlistId);
 }
