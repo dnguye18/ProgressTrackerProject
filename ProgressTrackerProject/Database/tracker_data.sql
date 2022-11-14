@@ -14,6 +14,7 @@ INSERT INTO shows VALUES (NULL, "House of the Dragon", 10);
 
 SELECT * FROM watchlist;
 SELECT * FROM user;
+SELECT * FROM shows;
 
 INSERT INTO user VALUES (NULL, "test@test.com", "test", "billy", "bob");
 INSERT INTO watchlist VALUES (NULL, 1, 1, 1);

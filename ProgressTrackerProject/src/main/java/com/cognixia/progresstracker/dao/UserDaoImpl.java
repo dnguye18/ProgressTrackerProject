@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 
             ResultSet rs = pstmt.executeQuery();
 
-            rs.first();
+            rs.next();
 
 
             int id = rs.getInt("user_id");

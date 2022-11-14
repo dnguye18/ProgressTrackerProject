@@ -16,10 +16,12 @@ public class View {
         print("Main Menu");
         print("1. View Watchlist");
         print("2. Update Watchlist");
-        print("3. Tests");
+        print("3. Add Watchlist");
+        print("4. Add User");
+        print("5. Get User by Id");
         print("0. Exit");
 
-        return readInt("Please select from the above choices.", 0, 3);
+        return readInt("Please select from the above choices.", 0, 5);
     }
 
     public Watchlist addWatchlist() {
@@ -43,6 +45,11 @@ public class View {
         User user = new User(email, password, fName, lName);
 
         return user;
+    }
+
+    public int getUserId() {
+        return readInt("Please enter user id");
+
     }
 
     public int getWatchlistId() {

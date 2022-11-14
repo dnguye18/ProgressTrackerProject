@@ -34,7 +34,14 @@ public class MainController {
                     updateWatchlist();
                     break;
                 case 3:
-                    tests();
+                    addWatchlist();
+                    break;
+                case 4:
+                    addUser();
+                    break;
+                case 5:
+                    getUserbyId();
+                    break;
                 case 0:
                     exit();
                     break;
@@ -47,20 +54,31 @@ public class MainController {
         }
     }
 
-    private void tests() {
-//        Watchlist list = view.addWatchlist();
-//        if (watchlistDao.addWatchlist(list)) {
-//            System.out.println("Successfully added");
-//        } else {
-//            System.out.println("Error adding watchlist");
-//        }
-
+    private void addUser() {
         User user = view.addUser();
         if (userDao.addUser(user)) {
             System.out.println("Successfully added");
         } else {
             System.out.println("Failed to add new user");
         }
+    }
+
+    private void addWatchlist() {
+        Watchlist list = view.addWatchlist();
+        if (watchlistDao.addWatchlist(list)) {
+            System.out.println("Successfully added");
+        } else {
+            System.out.println("Error adding watchlist");
+        }
+    }
+
+    private void getUserbyId() {
+        // get user by id test
+        int userid = view.getUserId();
+        User user = userDao.getUserById(userid);
+        System.out.println("id: " + user.getId());
+        System.out.println("email: " + user.getEmail());
+        System.out.println("password: " + user.getPassword());
 
     }
     private void viewWatchlist() {
