@@ -4,32 +4,43 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-	
+
 	public static void main(String[] args) {
-		ShowDAOClass a = new ShowDAOClass();
+		ShowDAOClass showDao = new ShowDAOClass();
 		
-		
+		// --Testing add show
+//		showDao.addShow("Brothers in Crime", 11);
+
 		// -- testing adding a show
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter a show name to add");
-		if(sc.hasNextLine()) {
-			String s = sc.nextLine();
-			try {
-//				System.out.println(s);
-				a.addShow(s, 10);
-			} catch (Exception e){
-				System.out.println("Unable to add Show");
-			}
-			
-		}
-		sc.close();
+		showDao.addShow();
+		showDao.addShow();
 		
-		
-//		 -- testing retrieval of all shows -- 
-		List<Show> b = a.getAllShows();
-		for(Show i : b) {
-		System.out.println(i.getShow_name());
+		// --Testing retrieval of all shows...
+		List<Show> ShowList = showDao.getAllShows();
+
+		// ...printing all shows
+		System.out.println("----- Printing all Shows -----");
+		for (Show show : ShowList) {
+			System.out.println(show.getShow_name());
 		}
-	
+
+		// --Testing getting first and second shows
+		Show firstShow = showDao.getShow(1);
+		System.out.println("Retrieved show: " + firstShow.getShow_name());
+		Show secondShow = showDao.getShow(2);
+		System.out.println("Retrieved show: " + secondShow.getShow_name());
+
+		// --Testing updating show
+		showDao.updateShow(secondShow);
+
+		// --Testing delete show
+		showDao.deleteShow(2);
+		
+		// ...printing all shows
+		System.out.println("----- Printing all Shows -----");
+		for (Show show : ShowList) {
+			System.out.println(show.getShow_name());
+		}
+		System.out.println("----- End of all Shows -----");
 	}
 }
