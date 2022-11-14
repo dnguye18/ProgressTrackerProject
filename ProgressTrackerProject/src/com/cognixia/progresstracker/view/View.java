@@ -17,11 +17,23 @@ public class View {
 
         return readInt("Please select from the above choices.", 0, 2);
     }
-
-    public int getWatchlistId() {
-        return readInt("Please enter watchlist id");
+    
+    public int loginMenu() {
+    	print("1. Login as Existing User");
+    	print("0. Exit");
+    	
+    	return readInt("Please select from the above choices.", 0, 1);
+    }
+    
+    public String getEmail() {
+    	return readString("Enter your email");
+    }
+    
+    public String getPassword() {
+    	return readString("Enter your password");
 
     }
+    
     public static void print(String msg) {
         System.out.println(msg);
     }

@@ -13,10 +13,10 @@ import java.util.Properties;
 public class ConnManager {
     private static Connection connection = null;
 
-    private static final String URL = "jdbc:mysql://localhost:3306/ProgressTracker?serverTimezone=America/Chicago&useSSL=false&allowPublicKeyRetrieval=true";
+    private static final String URL = "jdbc:mysql://localhost:3306/ProgressTracker";
 
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "admin";
+    private static final String PASSWORD = "root";
 
     private static void makeConnection() {
         try {

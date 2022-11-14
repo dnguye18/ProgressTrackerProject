@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WatchlistDaoImpl implements WatchlistDao {
@@ -33,6 +34,30 @@ public class WatchlistDaoImpl implements WatchlistDao {
 
         } catch (SQLException e) {
             System.out.println("Watchlist with id = " + watchlistId + " not found.");
+        }
+
+        return null;
+    }
+    
+    public List<Watchlist> getWatchlistByUserId(int userId){
+    	try {
+            PreparedStatement pstmt = conn.prepareStatement("select * from watchlist where user_id = ?");
+            pstmt.setInt(1, userId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            ArrayList<Watchlist> watchlist = new ArrayList<Watchlist>();
+            
+            while (rs.next()) {
+            	watchlist.add(new Watchlist(rs.getInt(1),
+            			rs.getInt(2),
+            			rs.getInt(3)));
+            }
+
+            return watchlist;
+
+        } catch (SQLException e) {
+            System.out.println("Watchlist with id = " + userId + " not found.");
         }
 
         return null;

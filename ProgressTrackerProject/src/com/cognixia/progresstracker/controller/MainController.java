@@ -1,6 +1,10 @@
 package com.cognixia.progresstracker.controller;
 
+import com.cognixia.progresstracker.entities.User;
 import com.cognixia.progresstracker.entities.Watchlist;
+
+import java.util.List;
+
 import com.cognixia.progresstracker.dao.WatchlistDaoImpl;
 import com.cognixia.progresstracker.view.View;
 
@@ -10,45 +14,54 @@ import com.cognixia.progresstracker.view.View;
  */
 public class MainController {
     private View view = new View();
+    private UserController userCon = new UserController();
     private WatchlistDaoImpl dao = new WatchlistDaoImpl();
 
-    boolean running = true;
+    private boolean running = true;
+    private boolean internalLoopRun = true; 
 
-    public void run() {
+	public void run() {
+		while (running) {
+			User currUser = userCon.login();
 
+			if (currUser != null) {
+				View.print("Greetings " + currUser.getFirstName());
+				internalLoopRun = true;
+				while (internalLoopRun) {
+					int choice = view.menu();
 
-        while (running) {
+					switch (choice) {
 
-            int choice = view.menu();
+					case 1:
+						viewWatchlist(currUser);
+						break;
+					case 2:
+						updateWatchlist();
+						break;
+					case 0:
+						exitInternal();
+						userCon.clearUser();
+						break;
+					default:
+						System.out.println();
 
-            switch (choice) {
+					}
+					System.out.println();
+					System.out.println();
+				}
+			} else {
+				exit();
+			}
 
-                case 1:
-                    viewWatchlist();
-                    break;
-                case 2:
-                    updateWatchlist();
-                    break;
-                case 0:
-                    exit();
-                    break;
-                default:
-                    System.out.println();
+		}
+	}
 
-            }
-            System.out.println();
-            System.out.println();
+    private void viewWatchlist(User currUser) {
+        List<Watchlist> watchlist = dao.getWatchlistByUserId(currUser.getId());
+        
+        for (Watchlist entry: watchlist) {
+        	View.print(entry.toString());
         }
-    }
-
-    private void viewWatchlist() {
-        int watchlistid = view.getWatchlistId();
-
-        Watchlist watchlist = dao.getWatchlistById(watchlistid);
-
-        if(watchlist != null) System.out.println(watchlist.getWatchlistid() + " is in the db.");
-
-        else System.out.println(watchlistid + " Was not found.");
     }
 
     private void updateWatchlist() {
@@ -56,7 +69,11 @@ public class MainController {
     }
 
     private void exit() {
-        view.print("Bye");
+        View.print("Bye");
         running = false;
+    }
+    
+    private void exitInternal() {
+    	internalLoopRun = false;
     }
 }
