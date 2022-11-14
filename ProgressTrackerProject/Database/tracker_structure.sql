@@ -20,17 +20,12 @@ CREATE TABLE IF NOT EXISTS shows (
     total_eps INT NOT NULL
 );
 
--- Table for progress id and name of progress id
-CREATE TABLE IF NOT EXISTS progress (
-	progress_id INT PRIMARY KEY,
-    progress_name VARCHAR(40) NOT NULL
-);
-
 -- Table for keeping track of what user has watched what show
 CREATE TABLE IF NOT EXISTS watchlist (
 	watchlist_id INT NOT NULL AUTO_INCREMENT,
 	user_id INT NOT NULL,
     show_id INT NOT NULL,
+    progress TINYINT NOT NULL,
     PRIMARY KEY (watchlist_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id),
     FOREIGN KEY (show_id) REFERENCES shows(show_id)
