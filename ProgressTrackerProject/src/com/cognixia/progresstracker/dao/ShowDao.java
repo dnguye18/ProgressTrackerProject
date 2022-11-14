@@ -9,8 +9,8 @@ public interface ShowDao {
     Show getShowByName(String name);
     List<Show> getAllShows();
     List<Show> searchShow(int showId);
-    Show addShow(Show show);
-    void updateShow(Show show);
-    void deleteShowById(int showId);
+    Boolean addShow(Show show);
+    Boolean updateShow(Show show);
+    Boolean deleteShowById(int showId);
 
 }

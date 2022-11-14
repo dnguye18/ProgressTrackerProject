@@ -1,5 +1,6 @@
 package com.cognixia.progresstracker.view;
 
+import com.cognixia.progresstracker.entities.User;
 import com.cognixia.progresstracker.entities.Watchlist;
 
 import java.util.Scanner;
@@ -31,6 +32,17 @@ public class View {
         list.setShowid(showid);
         list.setProgressid(progressid);
         return list;
+    }
+
+    public User addUser() {
+        String email = readString("Enter email:");
+        String password = readString("Enter password:");
+        String fName = readString("Enter first name:");
+        String lName = readString("Enter last name:");
+
+        User user = new User(email, password, fName, lName);
+
+        return user;
     }
 
     public int getWatchlistId() {

@@ -13,6 +13,12 @@ public class Watchlist {
 
     }
 
+    public Watchlist(int userid, int showid, int progressid) {
+        this.userid = userid;
+        this.showid = showid;
+        this.progressid = progressid;
+    }
+
     public Watchlist(int watchlistid, int userid, int showid, int progressid) {
         this.watchlistid = watchlistid;
         this.userid = userid;

@@ -6,10 +6,17 @@ public class Show {
 
     private int showid;
     private String showName;
+    private int totalEps;
 
-    public Show(int showid, String showName) {
+    public Show(String showName, int totalEps) {
+        this.showName = showName;
+        this.totalEps = totalEps;
+    }
+
+    public Show(int showid, String showName, int totalEps) {
         this.showid = showid;
         this.showName = showName;
+        this.totalEps = totalEps;
     }
 
     @Override
@@ -43,6 +50,14 @@ public class Show {
 
     public String getShowName() {
         return showName;
+    }
+
+    public int getTotalEps() {
+        return totalEps;
+    }
+
+    public void setTotalEps(int totalEps) {
+        this.totalEps = totalEps;
     }
 
     public void setShowName(String showName) {
