@@ -9,6 +9,10 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
+<<<<<<< HEAD
+=======
+        <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
+>>>>>>> lewi
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
                 
         <property name="context-root" value="ProgressTrackerProject"/>

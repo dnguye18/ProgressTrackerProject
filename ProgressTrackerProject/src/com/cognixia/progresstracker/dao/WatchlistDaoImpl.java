@@ -3,10 +3,7 @@ package com.cognixia.progresstracker.dao;
 import com.cognixia.progresstracker.connection.ConnManager;
 import com.cognixia.progresstracker.entities.Watchlist;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +25,9 @@ public class WatchlistDaoImpl implements WatchlistDao {
             int watchlistid = rs.getInt("watchlist_id");
             int userid = rs.getInt("user_id");
             int showid = rs.getInt("show_id");
+            int progressid = rs.getInt("progress_id");
 
-            Watchlist watchlist = new Watchlist(watchlistid, userid, showid);
+            Watchlist watchlist = new Watchlist(watchlistid, userid, showid, progressid);
             return watchlist;
 
         } catch (SQLException e) {
@@ -38,22 +36,133 @@ public class WatchlistDaoImpl implements WatchlistDao {
 
         return null;
     }
-    
-    public List<Watchlist> getWatchlistByUserId(int userId){
-    	try {
+
+    @Override
+    public List<Watchlist> getAllWatchlists() {
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM watchlist");
+
+            List<Watchlist> watchList = new ArrayList<Watchlist>();
+
+            while(rs.next()) {
+                int watchlistid = rs.getInt("watchlist_id");
+                int userid = rs.getInt("user_id");
+                int showid = rs.getInt("show_id");
+                int progressid = rs.getInt("progress_id");
+
+                Watchlist list = new Watchlist(watchlistid, userid, showid, progressid);
+                watchList.add(list);
+            }
+
+            // ...and return that list once finished
+            return watchList;
+
+        } catch (SQLException e) {
+            System.out.println("Could not retrieve watchlist from database");
+        }
+
+        return null;
+    }
+
+    @Override
+    public List<Watchlist> searchWatchlist(int userId) {
+        try {
             PreparedStatement pstmt = conn.prepareStatement("select * from watchlist where user_id = ?");
             pstmt.setInt(1, userId);
 
             ResultSet rs = pstmt.executeQuery();
 
-            ArrayList<Watchlist> watchlist = new ArrayList<Watchlist>();
-            
-            while (rs.next()) {
-            	watchlist.add(new Watchlist(rs.getInt(1),
-            			rs.getInt(2),
-            			rs.getInt(3)));
+            rs.next();
+
+            List<Watchlist> watchList = new ArrayList<Watchlist>();
+
+            while(rs.next()) {
+                int watchlistid = rs.getInt("watchlist_id");
+                int userid = rs.getInt("user_id");
+                int showid = rs.getInt("show_id");
+                int progressid = rs.getInt("progress_id");
+
+                Watchlist list = new Watchlist(watchlistid, userid, showid, progressid);
+                watchList.add(list);
             }
 
+            // ...and return that list once finished
+            return watchList;
+
+        } catch (SQLException e) {
+            System.out.println("Could not retrieve user's watchlist from database");
+        }
+
+        return null;
+    }
+
+    @Override
+    public Watchlist addWatchlist(Watchlist watchlist) {
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("INSERT into watchlist(NULL, user_id, show_id, progress_id) values(?, ?, ?, ?)");
+            pstmt.setInt(1, watchlist.getWatchlistid());
+            pstmt.setInt(2, watchlist.getUserid());
+            pstmt.setInt(2, watchlist.getShowid());
+            pstmt.setInt(2, watchlist.getProgressid());
+
+            int i = pstmt.executeUpdate();
+
+            if(i > 0) {
+                return watchlist;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return watchlist;
+    }
+
+    @Override
+    public Watchlist getWatchlistByProgress(int progressId) {
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("select * from watchlist where progress_id = ?");
+            pstmt.setInt(1, progressId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            rs.next();
+
+
+            int watchlistid = rs.getInt("watchlist_id");
+            int userid = rs.getInt("user_id");
+            int showid = rs.getInt("show_id");
+            int progressid = rs.getInt("progress_id");
+
+            Watchlist watchlist = new Watchlist(watchlistid, userid, showid, progressid);
+            return watchlist;
+
+        } catch (SQLException e) {
+            System.out.println("Watchlist with id = " + progressId + " not found.");
+        }
+
+        return null;
+    }
+
+    @Override
+    public Watchlist getWatchlistByUser(int userId) {
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("select * from watchlist where watchlist_id = ?");
+            pstmt.setInt(1, userId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            rs.next();
+
+
+            int watchlistid = rs.getInt("watchlist_id");
+            int userid = rs.getInt("user_id");
+            int showid = rs.getInt("show_id");
+            int progressid = rs.getInt("progress_id");
+
+            Watchlist watchlist = new Watchlist(watchlistid, userid, showid, progressid);
             return watchlist;
 
         } catch (SQLException e) {
@@ -64,27 +173,30 @@ public class WatchlistDaoImpl implements WatchlistDao {
     }
 
     @Override
-    public List<Watchlist> getAllWatchlists() {
-        return null;
-    }
-
-    @Override
-    public List<Watchlist> searchWatchlist(int watchlistId) {
-        return null;
-    }
-
-    @Override
-    public Watchlist addWatchlist(Watchlist watchlist) {
-        return null;
-    }
-
-    @Override
     public void updateWatchlist(Watchlist watchlist) {
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("UPDATE watchlist SET user_id = ?, show_id = ?, progress_id = ? WHERE watchlist_id = ?");
+            pstmt.setInt(1, watchlist.getUserid());
+            pstmt.setInt(2, watchlist.getShowid());
+            pstmt.setInt(3, watchlist.getProgressid());
 
+            int i = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void deleteWatchlistById(int watchlistId) {
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("DELETE from watchlist WHERE watchlist_id = ?");
+            pstmt.setInt(1, watchlistId);
 
+            int i = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Department with id = " + watchlistId + " not found.");
+        }
     }
 }

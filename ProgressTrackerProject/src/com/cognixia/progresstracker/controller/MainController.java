@@ -57,7 +57,7 @@ public class MainController {
 	}
 
     private void viewWatchlist(User currUser) {
-        List<Watchlist> watchlist = dao.getWatchlistByUserId(currUser.getId());
+        List<Watchlist> watchlist = dao.getWatchlistByUser(currUser.getId());
         
         for (Watchlist entry: watchlist) {
         	View.print(entry.toString());
