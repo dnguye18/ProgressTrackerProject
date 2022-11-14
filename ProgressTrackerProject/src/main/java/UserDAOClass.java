@@ -1,6 +1,16 @@
 package main.java;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserDAOClass implements UserDAO {
+	
+	private Connection conn = ConnectionManager.getConnection();
 
 	@Override
 	public boolean addUser(User u) {
@@ -24,6 +34,10 @@ public class UserDAOClass implements UserDAO {
 	public boolean updateUser(User u) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 	
 }
