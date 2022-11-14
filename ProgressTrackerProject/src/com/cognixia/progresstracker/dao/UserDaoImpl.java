@@ -70,7 +70,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void deleteUserById(int userId) {
+        try {
+            PreparedStatement pstmt = conn.prepareStatement("DELETE from user WHERE user_id = ?");
+            pstmt.setInt(1, userId);
 
+            int i = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Department with id = " + userId + " not found.");
+        }
     }
 
 }
